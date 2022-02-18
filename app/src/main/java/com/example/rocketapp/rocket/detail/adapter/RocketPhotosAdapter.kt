@@ -32,7 +32,7 @@ class RocketPhotosAdapter(
             .centerCrop()
             .transform(RoundedCorners(roundRadius))
             .placeholder(R.drawable.rocket_photo_placeholder)
-            .into(imgRocketPhoto);
+            .into(imgRocketPhoto)
     }
 
     class RocketPhotosViewHolder(binding: RowRocketPhotoBinding) : RecyclerView.ViewHolder(binding.root) {

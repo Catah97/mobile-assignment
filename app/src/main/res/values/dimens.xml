@@ -4,6 +4,6 @@
     <dimen name="rocket_icon_size">24dp</dimen>
     <dimen name="stage_item_margin">8dp</dimen>
     <dimen name="rocket_detail_item_top_margin">8dp</dimen>
-    <dimen name="max_rocket_photo_size">300dp</dimen>
+    <dimen name="rocket_photo_size">300dp</dimen>
     <dimen name="rocket_photo_cornes_round">10dp</dimen>
 </resources>
