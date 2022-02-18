@@ -5,9 +5,12 @@ import com.example.rocketapp.rocket.repository.model.info.RocketHeight
 import com.example.rocketapp.rocket.repository.model.info.RocketMass
 import com.example.rocketapp.rocket.repository.model.stages.RocketFirstStage
 import com.example.rocketapp.rocket.repository.model.stages.RocketSecondStage
+import java.util.*
 
 data class Rocket(
     val id: Int,
+    val name: String,
+    val firstFlight: Date,
     val description: String,
     val height: RocketHeight,
     val mass: RocketMass,

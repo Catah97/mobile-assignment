@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 
+
 abstract class BaseFragment<VB: ViewBinding> : Fragment() {
 
     private var _binding: VB? = null

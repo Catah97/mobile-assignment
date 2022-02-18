@@ -13,6 +13,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.rocketapp.MainActivity
 import com.example.rocketapp.R
 import com.example.rocketapp.databinding.FragmentRocketListBinding
+import com.example.rocketapp.rocket.list.adapter.RocketListAdapter
 import com.example.rocketapp.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -23,28 +24,39 @@ class RocketListFragment: BaseFragment<FragmentRocketListBinding>() {
 
     private val rocketListViewModel: RocketListViewModel by viewModels()
 
+    private val rocketListAdapter by lazy {
+        RocketListAdapter()
+    }
+
     override val bindingInflater = { layoutInflater: LayoutInflater, parent: ViewGroup? ->
         FragmentRocketListBinding.inflate(layoutInflater, parent, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.txtTitle.setOnClickListener {
-            navController.navigate(R.id.action_rocket_list_to_rocket_detail)
-        }
-
+        setRocketListRecyclerView()
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                rocketListViewModel.rocketsData.collect { result ->
-                    val list = result?.getOrNull()
-                    Log.d(TAG, "reload list result is: $list")
+                rocketListViewModel.rocketItemsData.collect { list ->
+                    Log.d(TAG, "onViewCreated: result: $list")
+                    rocketListAdapter.submitList(list)
                 }
             }
+        }
+    }
+
+    private fun setRocketListRecyclerView() {
+        binding.recyclerView.apply {
+            adapter = rocketListAdapter
+            setHasFixedSize(true)
+        }
+        //TODO budu predavat argument
+        rocketListAdapter.setOnItemClickListener { _, rocket ->
+            navController.navigate(R.id.action_rocket_list_to_rocket_detail)
         }
     }
 
     companion object {
         private const val TAG = "RocketListFragment"
     }
-
 }
