@@ -12,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.rocketapp.R
 import com.example.rocketapp.databinding.FragmentRocketDetailBinding
 import com.example.rocketapp.databinding.FragmentRocketListBinding
+import com.example.rocketapp.rocket.launch.RocketLaunchViewModel
 import com.example.rocketapp.rocket.list.RocketListFragment
 import com.example.rocketapp.rocket.list.RocketListViewModel
 import com.example.rocketapp.tools.BaseFragment
@@ -21,24 +22,22 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class RocketDetailFragment: BaseFragment<FragmentRocketDetailBinding>() {
-
-    private val rocketDetailViewModel: RocketDetailViewModel by viewModels()
+class RocketDetailFragment: BaseFragment<
+        FragmentRocketDetailBinding,
+        RocketDetailViewModel>(RocketDetailViewModel::class) {
 
     override val bindingInflater = { layoutInflater: LayoutInflater, parent: ViewGroup? ->
         FragmentRocketDetailBinding.inflate(layoutInflater, parent, false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.txtTitle.setOnClickListener {
             navController.navigate(R.id.action_rocket_detail_to_rocket_launch)
         }
-        rocketDetailViewModel.loadDetail(1)
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                rocketDetailViewModel.rocketData.collect { rocket ->
+                viewModel.rocketData.collect { rocket ->
                     Log.d(TAG, "reload list result is: $rocket")
                 }
             }

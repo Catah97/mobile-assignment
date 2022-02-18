@@ -13,16 +13,18 @@ import androidx.lifecycle.viewModelScope
 import com.example.rocketapp.MainActivity
 import com.example.rocketapp.R
 import com.example.rocketapp.databinding.FragmentRocketListBinding
+import com.example.rocketapp.rocket.detail.RocketDetailViewModel
 import com.example.rocketapp.rocket.list.adapter.RocketListAdapter
 import com.example.rocketapp.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
-class RocketListFragment: BaseFragment<FragmentRocketListBinding>() {
 
-    private val rocketListViewModel: RocketListViewModel by viewModels()
+@AndroidEntryPoint
+class RocketListFragment: BaseFragment<
+        FragmentRocketListBinding,
+        RocketListViewModel>(RocketListViewModel::class) {
 
     private val rocketListAdapter by lazy {
         RocketListAdapter()
@@ -37,7 +39,7 @@ class RocketListFragment: BaseFragment<FragmentRocketListBinding>() {
         setRocketListRecyclerView()
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                rocketListViewModel.rocketItemsData.collect { list ->
+                viewModel.rocketItemsData.collect { list ->
                     Log.d(TAG, "onViewCreated: result: $list")
                     rocketListAdapter.submitList(list)
                 }
