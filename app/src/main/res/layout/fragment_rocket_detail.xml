@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -9,19 +10,116 @@
             type="com.example.rocketapp.rocket.detail.RocketDetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/txtTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rocket detail"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="@dimen/app_padding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/txtOverviewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/overview"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                tools:text="asljdaskjdh jhkdkaj saksdkhajsdjhkas dahjksd ahjksdaajhsd ahd ahjkd asdas d"
+                android:id="@+id/txtOverview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{vm.rocketData.description}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtOverviewTitle" />
+
+            <TextView
+                android:id="@+id/txtParameters"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/parameters"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtOverview" />
+
+            <LinearLayout
+                style="@style/Theme.RocketApp.Parameters_Layout"
+                android:id="@+id/heightLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/diameterLayout"
+                app:layout_constraintTop_toBottomOf="@+id/txtParameters">
+
+                <TextView
+                    style="@style/Theme.RocketApp.Parameters_Text"
+                    setMetersText="@{vm.rocketData.height.meters}"
+                    android:id="@+id/txtHeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="90m" />
+
+                <TextView
+                    style="@style/Theme.RocketApp.Parameters_Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/height" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Theme.RocketApp.Parameters_Layout"
+                android:id="@+id/diameterLayout"
+                app:layout_constraintStart_toEndOf="@+id/heightLayout"
+                app:layout_constraintEnd_toStartOf="@+id/massLayout"
+                app:layout_constraintTop_toBottomOf="@+id/txtParameters">
+
+                <TextView
+                    style="@style/Theme.RocketApp.Parameters_Text"
+                    setMetersText="@{vm.rocketData.diameter.meters}"
+                    android:id="@+id/txtDiameter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="90m" />
+
+                <TextView
+                    style="@style/Theme.RocketApp.Parameters_Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/height" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Theme.RocketApp.Parameters_Layout"
+                android:id="@+id/massLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/diameterLayout"
+                app:layout_constraintTop_toBottomOf="@+id/txtParameters">
+
+                <TextView
+                    style="@style/Theme.RocketApp.Parameters_Text"
+                    setTonsText="@{vm.rocketData.mass.kg}"
+                    android:id="@+id/txtMass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="90m" />
+
+                <TextView
+                    style="@style/Theme.RocketApp.Parameters_Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/height" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 </layout>

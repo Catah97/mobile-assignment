@@ -13,6 +13,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.rocketapp.MainActivity
 import com.example.rocketapp.R
 import com.example.rocketapp.databinding.FragmentRocketListBinding
+import com.example.rocketapp.rocket.detail.RocketDetailFragment
 import com.example.rocketapp.rocket.detail.RocketDetailViewModel
 import com.example.rocketapp.rocket.list.adapter.RocketListAdapter
 import com.example.rocketapp.tools.BaseFragment
@@ -54,7 +55,8 @@ class RocketListFragment: BaseFragment<
         }
         //TODO budu predavat argument
         rocketListAdapter.setOnItemClickListener { _, rocket ->
-            navController.navigate(R.id.action_rocket_list_to_rocket_detail)
+            val arguments = RocketDetailFragment.createArguments(rocket.id)
+            navController.navigate(R.id.action_rocket_list_to_rocket_detail, arguments)
         }
     }
 

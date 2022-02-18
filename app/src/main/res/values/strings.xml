@@ -3,4 +3,10 @@
     <string name="rockets">Rockets</string>
     <string name="launch">Launch</string>
     <string name="detail">Detail</string>
+    <string name="overview">Overview</string>
+    <string name="parameters">Parameters</string>
+    <string name="height">Height</string>
+    <string name="m">m</string>
+    <string name="t">t</string>
+    <string name="loading">Loading</string>
 </resources>
