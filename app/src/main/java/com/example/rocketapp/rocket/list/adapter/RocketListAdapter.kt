@@ -12,7 +12,6 @@ import com.example.rocketapp.rocket.repository.model.Rocket
 import com.example.rocketapp.tools.date.toUiDate
 
 class RocketListAdapter(
-    private val context: Context,
     diffCallback: DiffUtil.ItemCallback<RocketItem> = RocketItemDiffCallback()
 ): ListAdapter<RocketItem, RocketListViewHolder>(diffCallback) {
 
@@ -23,7 +22,7 @@ class RocketListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RocketListViewHolder {
-        val layoutInflater = LayoutInflater.from(context)
+        val layoutInflater = LayoutInflater.from(parent.context)
         val binding = RowRocketItemBinding.inflate(layoutInflater, parent, false)
         return RocketListViewHolder(binding)
     }

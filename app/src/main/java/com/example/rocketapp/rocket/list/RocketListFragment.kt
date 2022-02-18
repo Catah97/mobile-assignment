@@ -25,7 +25,7 @@ class RocketListFragment: BaseFragment<FragmentRocketListBinding>() {
     private val rocketListViewModel: RocketListViewModel by viewModels()
 
     private val rocketListAdapter by lazy {
-        RocketListAdapter(requireContext())
+        RocketListAdapter()
     }
 
     override val bindingInflater = { layoutInflater: LayoutInflater, parent: ViewGroup? ->
