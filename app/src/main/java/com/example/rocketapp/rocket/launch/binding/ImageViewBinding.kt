@@ -1,8 +1,7 @@
 package com.example.rocketapp.rocket.launch.binding
 
-import android.animation.ObjectAnimator
-import android.view.animation.Animation
-import android.view.animation.TranslateAnimation
+import android.content.res.Resources
+import android.view.animation.AccelerateInterpolator
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
@@ -20,10 +19,14 @@ fun ImageView.setRocketLaunchStatusImage(status: RocketLaunchStatus) {
     val drawable = ContextCompat.getDrawable(context, icon)
     setImageDrawable(drawable)
     if (status == LAUNCHING) {
-        ObjectAnimator.ofFloat(this, "translationY", 0F).apply {
-            duration = 1000
-            start()
-        }
-
+        val displayMetrics = Resources.getSystem().displayMetrics
+        val displayHeight: Int = displayMetrics.heightPixels
+        val animationDistance: Float = -(displayHeight + height).toFloat()
+        this
+            .animate()
+            .translationY(animationDistance)
+            .setDuration(3000)
+            .setInterpolator(AccelerateInterpolator())
+            .start()
     }
 }
