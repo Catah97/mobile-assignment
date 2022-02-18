@@ -145,6 +145,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/layoutFirstStage" />
 
             <TextView
+                visibilityByRocketPhotos="@{vm.rocketData}"
                 android:id="@+id/txtPhotos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -154,6 +155,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layoutSecondStage" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                bindRocketPhotos="@{vm.rocketData}"
+                android:id="@+id/rocketPhotosRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/rocket_detail_item_top_margin"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:nestedScrollingEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtPhotos" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

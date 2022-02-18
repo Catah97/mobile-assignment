@@ -12,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.rocketapp.R
 import com.example.rocketapp.databinding.FragmentRocketDetailBinding
 import com.example.rocketapp.databinding.FragmentRocketListBinding
+import com.example.rocketapp.rocket.detail.adapter.RocketPhotosAdapter
 import com.example.rocketapp.rocket.launch.RocketLaunchViewModel
 import com.example.rocketapp.rocket.list.RocketListFragment
 import com.example.rocketapp.rocket.list.RocketListViewModel
@@ -32,8 +33,16 @@ class RocketDetailFragment: BaseFragment<
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setPhotoRecyclerView()
         loadRocket()
         observerRocket()
+    }
+
+    private fun setPhotoRecyclerView() {
+        val photosAdapter = RocketPhotosAdapter()
+        binding.rocketPhotosRecyclerView.apply {
+            adapter = photosAdapter
+        }
     }
 
     private fun loadRocket() {
@@ -61,6 +70,7 @@ class RocketDetailFragment: BaseFragment<
             title = newTitle
         }
     }
+
 
     companion object {
         private const val TAG = "RocketDetailFragment"
