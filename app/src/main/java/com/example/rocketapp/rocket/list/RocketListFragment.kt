@@ -27,10 +27,6 @@ class RocketListFragment: BaseFragment<
         FragmentRocketListBinding,
         RocketListViewModel>(RocketListViewModel::class) {
 
-    private val rocketListAdapter by lazy {
-        RocketListAdapter()
-    }
-
     override val bindingInflater = { layoutInflater: LayoutInflater, parent: ViewGroup? ->
         FragmentRocketListBinding.inflate(layoutInflater, parent, false)
     }
@@ -38,22 +34,14 @@ class RocketListFragment: BaseFragment<
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setRocketListRecyclerView()
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.rocketItemsData.collect { list ->
-                    Log.d(TAG, "onViewCreated: result: $list")
-                    rocketListAdapter.submitList(list)
-                }
-            }
-        }
     }
 
     private fun setRocketListRecyclerView() {
+        val rocketListAdapter = RocketListAdapter()
         binding.recyclerView.apply {
             adapter = rocketListAdapter
             setHasFixedSize(true)
         }
-        //TODO budu predavat argument
         rocketListAdapter.setOnItemClickListener { _, rocket ->
             val arguments = RocketDetailFragment.createArguments(rocket.id)
             navController.navigate(R.id.action_rocket_list_to_rocket_detail, arguments)
