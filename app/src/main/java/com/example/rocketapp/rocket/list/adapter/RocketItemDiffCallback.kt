@@ -5,10 +5,10 @@ import androidx.recyclerview.widget.DiffUtil
 class RocketItemDiffCallback: DiffUtil.ItemCallback<RocketItem>() {
 
     override fun areItemsTheSame(oldItem: RocketItem, newItem: RocketItem): Boolean {
-        return oldItem == newItem
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: RocketItem, newItem: RocketItem): Boolean {
-        return areItemsTheSame(oldItem, newItem)
+        return oldItem == newItem
     }
 }
