@@ -2,6 +2,7 @@
 <resources>
     <color name="primary_color">#FF3C87</color>
     <color name="primary_color_dark">#CC306C</color>
+    <color name="stage_background_color">#F6F6F6</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

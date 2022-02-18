@@ -2,4 +2,6 @@
 <resources>
     <dimen name="app_padding">8dp</dimen>
     <dimen name="rocket_icon_size">24dp</dimen>
+    <dimen name="stage_item_margin">8dp</dimen>
+    <dimen name="rocket_detail_item_top_margin">8dp</dimen>
 </resources>

@@ -9,13 +9,15 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.RocketApp.Parameters_Layout" >
+    <style name="Theme.RocketApp.Parameters_Layout">
+
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@drawable/parameters_background</item>
         <item name="android:orientation">vertical</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/rocket_detail_item_top_margin</item>
         <item name="android:padding">@dimen/app_padding</item>
     </style>
 
