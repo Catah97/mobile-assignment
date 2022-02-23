@@ -14,7 +14,6 @@ import javax.inject.Singleton
 
 interface SpaceXRocketRepository {
     fun getRocketData(): StateFlow<Result<List<Rocket>>?>
-    suspend fun getRocketById(rocketId: Int): Rocket?
     suspend fun loadRocketData(): Result<List<Rocket>>
     suspend fun clearCache()
 }
@@ -40,16 +39,6 @@ class ProdSpaceXRocketRepository(
             }.toResult()
             rocketsData.value = result
             result
-        }
-    }
-
-
-    override suspend fun getRocketById(rocketId: Int): Rocket? {
-        return withContext(Dispatchers.Default) {
-            val rocketResult = rocketsData.value
-            rocketResult
-                ?.getOrNull()
-                ?.find { it.id == rocketId }
         }
     }
 }

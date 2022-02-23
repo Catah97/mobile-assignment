@@ -28,7 +28,6 @@ class RocketDetailFragment: BaseFragment<
     override val bindingInflater = { layoutInflater: LayoutInflater, parent: ViewGroup? ->
         FragmentRocketDetailBinding.inflate(layoutInflater, parent, false)
     }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.detail_menu, menu);
         return super.onCreateOptionsMenu(menu, inflater)
@@ -45,13 +44,20 @@ class RocketDetailFragment: BaseFragment<
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        loadRocket()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setPhotoRecyclerView()
-        loadRocket()
         observerRocket()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.rocketData.collect { data ->
+                    Log.d(TAG, "onViewCreated: new data: $data")
+                }
+            }
+        }
     }
 
     private fun setPhotoRecyclerView() {

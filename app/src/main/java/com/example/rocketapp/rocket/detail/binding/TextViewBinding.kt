@@ -10,16 +10,15 @@ import kotlin.math.roundToInt
 
 @BindingAdapter("setMetersText")
 fun TextView.setMetersText(value: Double) {
-    val meters = context.getString(R.string.m)
-    val textValue = "${value.roundToInt()}$meters"
+    val mates = value.roundToInt()
+    val textValue = context.getString(R.string.m, mates)
     text = textValue
 }
 
 @BindingAdapter("setTonsText")
 fun TextView.setTonsText(value: Double) {
-    val tons = context.getString(R.string.t)
     val tonsValue = value.roundToInt() / 1000
-    val textValue = "$tonsValue$tons"
+    val textValue = context.getString(R.string.t, tonsValue)
     text = textValue
 }
 
@@ -35,21 +34,19 @@ fun TextView.setTonsText(reusable: Boolean) {
 
 @BindingAdapter("setEnginesText")
 fun TextView.setEnginesText(enginesCount: Int) {
-    val engines = context.getString(R.string.engines)
-    val textValue = "$enginesCount $engines"
+    val textValue = context.getString(R.string.engines, enginesCount)
     text = textValue
 }
 
 @BindingAdapter("setTonsOfFuelText")
 fun TextView.setTonsOfFuelText(tonsOfFuel: Double) {
-    val describe = context.getString(R.string.tons_of_fuel)
-    val textValue = "${tonsOfFuel.roundToInt()} $describe"
+    val tonsOfFuelValue = tonsOfFuel.roundToInt()
+    val textValue = context.getString(R.string.tons_of_fuel, tonsOfFuelValue)
     text = textValue
 }
 
 @BindingAdapter("setSecondBurnTimeText")
 fun TextView.setSecondBurnTimeText(secondBurnTimeText: Int) {
-    val describe = context.getString(R.string.seconds_burn_time)
-    val textValue = "$secondBurnTimeText $describe"
+    val textValue = context.getString(R.string.seconds_burn_time, secondBurnTimeText)
     text = textValue
 }
