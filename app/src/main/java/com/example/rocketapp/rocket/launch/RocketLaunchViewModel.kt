@@ -15,8 +15,10 @@ class RocketLaunchViewModel @Inject constructor(
     val launchStatusData = MutableStateFlow(RocketLaunchStatus.IDLE)
 
     fun launchRocket() {
-        viewModelScope.launch {
-            launchStatusData.value = RocketLaunchStatus.LAUNCHING
+        if (launchStatusData.value == RocketLaunchStatus.IDLE) {
+            viewModelScope.launch {
+                launchStatusData.value = RocketLaunchStatus.LAUNCHING
+            }
         }
     }
 
