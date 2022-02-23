@@ -1,7 +1,10 @@
 package com.example.rocketapp.rocket.launch
 
 import android.content.Context
-import android.hardware.*
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,9 +19,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class RocketLaunchFragment: BaseFragment<
+class RocketLaunchFragment :
+    BaseFragment<
         FragmentRocketLaunchBinding,
-        RocketLaunchViewModel>(RocketLaunchViewModel::class), SensorEventListener {
+        RocketLaunchViewModel>(RocketLaunchViewModel::class),
+    SensorEventListener {
 
     private val rocketAnimationHelp = RocketAnimationHelp()
 
@@ -95,7 +100,7 @@ class RocketLaunchFragment: BaseFragment<
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
-        //Ignored
+        // Ignored
     }
 
     companion object {

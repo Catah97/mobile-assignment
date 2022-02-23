@@ -1,14 +1,12 @@
 package com.example.rocketapp.rocket.launch.binding
 
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.rocketapp.R
 import com.example.rocketapp.rocket.launch.RocketLaunchStatus
-import com.example.rocketapp.rocket.launch.RocketLaunchStatus.*
-import kotlin.math.roundToInt
+import com.example.rocketapp.rocket.launch.RocketLaunchStatus.DONE
+import com.example.rocketapp.rocket.launch.RocketLaunchStatus.IDLE
+import com.example.rocketapp.rocket.launch.RocketLaunchStatus.LAUNCHING
 
 @BindingAdapter("setRocketLaunchStatusText")
 fun TextView.setRocketLaunchStatusText(status: RocketLaunchStatus) {

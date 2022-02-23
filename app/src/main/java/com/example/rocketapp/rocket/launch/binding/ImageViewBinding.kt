@@ -1,8 +1,6 @@
 package com.example.rocketapp.rocket.launch.binding
 
-import android.content.res.Resources
 import android.view.View
-import android.view.animation.AccelerateInterpolator
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
@@ -10,7 +8,6 @@ import androidx.databinding.BindingAdapter
 import com.example.rocketapp.R
 import com.example.rocketapp.rocket.launch.RocketLaunchStatus
 import com.example.rocketapp.rocket.launch.RocketLaunchStatus.*
-
 
 @BindingAdapter("setRocketLaunchStatusImage")
 fun ImageView.setRocketLaunchStatusImage(status: RocketLaunchStatus) {

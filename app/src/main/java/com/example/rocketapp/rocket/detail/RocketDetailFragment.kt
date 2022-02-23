@@ -2,7 +2,12 @@ package com.example.rocketapp.rocket.detail
 
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -23,7 +28,7 @@ class RocketDetailFragment : BaseFragment<
         FragmentRocketDetailBinding.inflate(layoutInflater, parent, false)
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.detail_menu, menu);
+        inflater.inflate(R.menu.detail_menu, menu)
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
