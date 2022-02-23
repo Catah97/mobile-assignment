@@ -8,16 +8,12 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.viewbinding.ViewBinding
 import com.example.rocketapp.BR
-import javax.inject.Inject
 import kotlin.reflect.KClass
 
-
-abstract class BaseFragment<VB: ViewDataBinding, VM : BaseViewModel>(
+abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel>(
     private val viewModelClass: KClass<VM>
 ) : Fragment() {
 
@@ -28,9 +24,8 @@ abstract class BaseFragment<VB: ViewDataBinding, VM : BaseViewModel>(
     private var _binding: VB? = null
     protected val binding get() = _binding!!
 
-    //TODO pozdeji prepisu na data binding
+    // TODO pozdeji prepisu na data binding
     abstract val bindingInflater: (LayoutInflater, ViewGroup?) -> VB
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,5 +54,4 @@ abstract class BaseFragment<VB: ViewDataBinding, VM : BaseViewModel>(
     }
 
     protected open fun getViewModelId() = BR.vm
-
 }

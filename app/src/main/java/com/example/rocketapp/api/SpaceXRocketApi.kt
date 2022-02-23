@@ -7,5 +7,4 @@ interface SpaceXRocketApi {
 
     @GET("rockets")
     suspend fun getAll(): List<RocketItemDto>
-
 }

@@ -1,14 +1,11 @@
 package com.example.rocketapp.rocket.list
 
-import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.rocketapp.rocket.list.adapter.RocketItem
 import com.example.rocketapp.rocket.repository.SpaceXRocketRepository
-import com.example.rocketapp.rocket.repository.model.Rocket
 import com.example.rocketapp.tools.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
@@ -39,5 +36,4 @@ class RocketListViewModel @Inject constructor(
     companion object {
         private const val TAG = "RocketListViewModel"
     }
-
 }
