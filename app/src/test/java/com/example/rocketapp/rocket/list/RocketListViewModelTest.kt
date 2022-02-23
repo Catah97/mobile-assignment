@@ -1,9 +1,11 @@
 package com.example.rocketapp.rocket.list
 
 import com.example.rocketapp.rocket.list.adapter.RocketItem
+import com.example.rocketapp.rocket.repository.createErrorRocketRepository
 import com.example.rocketapp.rocket.repository.createRocketRepository
 import com.example.rocketapp.rocket.repository.model.Rocket
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
@@ -11,9 +13,10 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class RocketListViewModelTest {
 
-    private val mainThreadSurrogate = newSingleThreadContext("UI thread")
+    private val mainThreadSurrogate = Dispatchers.Main
 
     @Before
     fun setUp() {
@@ -23,7 +26,6 @@ class RocketListViewModelTest {
     @After
     fun tearDown() {
         Dispatchers.resetMain() // reset the main dispatcher to the original Main dispatcher
-        mainThreadSurrogate.close()
     }
 
     @Test
@@ -40,6 +42,17 @@ class RocketListViewModelTest {
             val repositoryItem = repositoryList[index]
             rocketItem.assert(repositoryItem)
         }
+    }
+
+    @Test
+    fun testRocketListLoadFailed() {
+        val repository = createErrorRocketRepository()
+        val viewModel = RocketListViewModel(repository)
+        viewModel.loadRockets()
+        //Waiting for coroutine to load data
+        Thread.sleep(500)
+        val viewModelList = viewModel.rocketItemsData.value
+        assert(viewModelList.isEmpty()) { "ViewModelList is not empty" }
     }
 
     private fun RocketItem.assert(rocket: Rocket) {
