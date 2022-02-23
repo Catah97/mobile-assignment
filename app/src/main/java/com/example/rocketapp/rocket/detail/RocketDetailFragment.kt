@@ -2,34 +2,33 @@ package com.example.rocketapp.rocket.detail
 
 import android.os.Bundle
 import android.util.Log
-import android.view.*
-import androidx.fragment.app.viewModels
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.rocketapp.R
 import com.example.rocketapp.databinding.FragmentRocketDetailBinding
-import com.example.rocketapp.databinding.FragmentRocketListBinding
 import com.example.rocketapp.rocket.detail.adapter.RocketPhotosAdapter
-import com.example.rocketapp.rocket.launch.RocketLaunchViewModel
-import com.example.rocketapp.rocket.list.RocketListFragment
-import com.example.rocketapp.rocket.list.RocketListViewModel
 import com.example.rocketapp.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class RocketDetailFragment: BaseFragment<
-        FragmentRocketDetailBinding,
-        RocketDetailViewModel>(RocketDetailViewModel::class) {
+class RocketDetailFragment : BaseFragment<
+    FragmentRocketDetailBinding,
+    RocketDetailViewModel>(RocketDetailViewModel::class) {
 
     override val bindingInflater = { layoutInflater: LayoutInflater, parent: ViewGroup? ->
         FragmentRocketDetailBinding.inflate(layoutInflater, parent, false)
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.detail_menu, menu);
+        inflater.inflate(R.menu.detail_menu, menu)
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -109,7 +108,5 @@ class RocketDetailFragment: BaseFragment<
             }
             return bundle
         }
-
     }
-
 }

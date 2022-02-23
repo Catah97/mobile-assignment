@@ -3,13 +3,12 @@ package com.example.rocketapp.tools.date
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 private fun getUiSimpleTimeFormat(): SimpleDateFormat {
     return SimpleDateFormat("dd.MM. yyyy HH:mm:ss", Locale.getDefault())
 }
 
 private fun getUiDayFormat(): SimpleDateFormat {
-    return SimpleDateFormat("EEEE", Locale.getDefault());
+    return SimpleDateFormat("EEEE", Locale.getDefault())
 }
 
 private fun getUiSimpleDateFormat(): SimpleDateFormat {
@@ -52,4 +51,3 @@ fun Date.toMidnightCalendar(): Calendar {
         }
     }
 }
-

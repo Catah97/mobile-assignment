@@ -2,7 +2,7 @@ package com.example.rocketapp.rocket.list.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 
-class RocketItemDiffCallback: DiffUtil.ItemCallback<RocketItem>() {
+class RocketItemDiffCallback : DiffUtil.ItemCallback<RocketItem>() {
 
     override fun areItemsTheSame(oldItem: RocketItem, newItem: RocketItem): Boolean {
         return oldItem.id == newItem.id

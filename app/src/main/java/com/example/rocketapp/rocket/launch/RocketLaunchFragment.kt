@@ -1,29 +1,29 @@
 package com.example.rocketapp.rocket.launch
 
 import android.content.Context
-import android.content.res.Resources
-import android.hardware.*
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateInterpolator
-import android.widget.ImageView
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.rocketapp.R
 import com.example.rocketapp.databinding.FragmentRocketLaunchBinding
 import com.example.rocketapp.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class RocketLaunchFragment: BaseFragment<
+class RocketLaunchFragment :
+    BaseFragment<
         FragmentRocketLaunchBinding,
-        RocketLaunchViewModel>(RocketLaunchViewModel::class), SensorEventListener {
+        RocketLaunchViewModel>(RocketLaunchViewModel::class),
+    SensorEventListener {
 
     private val rocketAnimationHelp = RocketAnimationHelp()
 
@@ -100,7 +100,7 @@ class RocketLaunchFragment: BaseFragment<
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
-        //Ignored
+        // Ignored
     }
 
     companion object {

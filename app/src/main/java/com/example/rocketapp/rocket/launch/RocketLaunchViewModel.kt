@@ -4,13 +4,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.rocketapp.tools.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RocketLaunchViewModel @Inject constructor(
-) : BaseViewModel() {
+class RocketLaunchViewModel @Inject constructor() : BaseViewModel() {
 
     val launchStatusData = MutableStateFlow(RocketLaunchStatus.IDLE)
 
@@ -27,5 +25,4 @@ class RocketLaunchViewModel @Inject constructor(
             launchStatusData.value = RocketLaunchStatus.DONE
         }
     }
-
 }

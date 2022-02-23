@@ -21,7 +21,7 @@ class RocketAnimationHelp {
             .start()
     }
 
-    class RocketAnimationCallBack(val onAnimationEnd: () -> Unit): Animator.AnimatorListener {
+    class RocketAnimationCallBack(val onAnimationEnd: () -> Unit) : Animator.AnimatorListener {
 
         override fun onAnimationStart(p0: Animator?) {
         }
@@ -35,7 +35,5 @@ class RocketAnimationHelp {
 
         override fun onAnimationRepeat(p0: Animator?) {
         }
-
     }
-
 }
