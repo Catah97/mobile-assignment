@@ -1,17 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/txtTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rocket detail"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <variable
+            name="vm"
+            type="com.example.rocketapp.rocket.detail.RocketDetailViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="@dimen/app_padding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtOverviewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/overview"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                tools:text="asljdaskjdh jhkdkaj saksdkhajsdjhkas dahjksd ahjksdaajhsd ahd ahjkd asdas d"
+                android:id="@+id/txtOverview"
+                android:layout_marginTop="@dimen/rocket_detail_item_top_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{vm.rocketData.description}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtOverviewTitle" />
+
+            <TextView
+                android:id="@+id/txtParameters"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/parameters"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/rocket_detail_item_top_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtOverview" />
+
+            <LinearLayout
+                style="@style/Theme.RocketApp.Parameters_Layout"
+                android:id="@+id/heightLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/diameterLayout"
+                app:layout_constraintTop_toBottomOf="@+id/txtParameters">
+
+                <TextView
+                    style="@style/Theme.RocketApp.Parameters_Text"
+                    setMetersText="@{vm.rocketData.height.meters}"
+                    android:id="@+id/txtHeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="90m" />
+
+                <TextView
+                    style="@style/Theme.RocketApp.Parameters_Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/height" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Theme.RocketApp.Parameters_Layout"
+                android:id="@+id/diameterLayout"
+                app:layout_constraintStart_toEndOf="@+id/heightLayout"
+                app:layout_constraintEnd_toStartOf="@+id/massLayout"
+                app:layout_constraintTop_toBottomOf="@+id/txtParameters">
+
+                <TextView
+                    style="@style/Theme.RocketApp.Parameters_Text"
+                    setMetersText="@{vm.rocketData.diameter.meters}"
+                    android:id="@+id/txtDiameter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="90m" />
+
+                <TextView
+                    style="@style/Theme.RocketApp.Parameters_Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/height" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Theme.RocketApp.Parameters_Layout"
+                android:id="@+id/massLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/diameterLayout"
+                app:layout_constraintTop_toBottomOf="@+id/txtParameters">
+
+                <TextView
+                    style="@style/Theme.RocketApp.Parameters_Text"
+                    setTonsText="@{vm.rocketData.mass.kg}"
+                    android:id="@+id/txtMass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="90m" />
+
+                <TextView
+                    style="@style/Theme.RocketApp.Parameters_Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/height" />
+
+            </LinearLayout>
+
+            <include
+                layout="@layout/view_first_stage"
+                bind:vm="@{vm}"
+                android:id="@+id/layoutFirstStage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/rocket_detail_item_top_margin"
+                app:layout_constraintEnd_toEndOf="@+id/txtParameters"
+                app:layout_constraintStart_toStartOf="@+id/txtParameters"
+                app:layout_constraintTop_toBottomOf="@+id/heightLayout" />
+
+            <include
+                layout="@layout/view_second_stage"
+                bind:vm="@{vm}"
+                android:id="@+id/layoutSecondStage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/rocket_detail_item_top_margin"
+                app:layout_constraintEnd_toEndOf="@+id/layoutFirstStage"
+                app:layout_constraintStart_toStartOf="@+id/layoutFirstStage"
+                app:layout_constraintTop_toBottomOf="@+id/layoutFirstStage" />
+
+            <TextView
+                visibilityByRocketPhotos="@{vm.rocketData}"
+                android:id="@+id/txtPhotos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/photos"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/rocket_detail_item_top_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutSecondStage" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                bindRocketPhotos="@{vm.rocketData}"
+                android:id="@+id/rocketPhotosRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/rocket_detail_item_top_margin"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:nestedScrollingEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtPhotos" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

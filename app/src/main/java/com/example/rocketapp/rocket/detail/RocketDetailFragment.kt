@@ -12,6 +12,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.rocketapp.R
 import com.example.rocketapp.databinding.FragmentRocketDetailBinding
 import com.example.rocketapp.databinding.FragmentRocketListBinding
+import com.example.rocketapp.rocket.detail.adapter.RocketPhotosAdapter
+import com.example.rocketapp.rocket.launch.RocketLaunchViewModel
 import com.example.rocketapp.rocket.list.RocketListFragment
 import com.example.rocketapp.rocket.list.RocketListViewModel
 import com.example.rocketapp.tools.BaseFragment
@@ -21,32 +23,79 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class RocketDetailFragment: BaseFragment<FragmentRocketDetailBinding>() {
-
-    private val rocketDetailViewModel: RocketDetailViewModel by viewModels()
+class RocketDetailFragment: BaseFragment<
+        FragmentRocketDetailBinding,
+        RocketDetailViewModel>(RocketDetailViewModel::class) {
 
     override val bindingInflater = { layoutInflater: LayoutInflater, parent: ViewGroup? ->
         FragmentRocketDetailBinding.inflate(layoutInflater, parent, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        loadRocket()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.txtTitle.setOnClickListener {
-            navController.navigate(R.id.action_rocket_detail_to_rocket_launch)
-        }
-        rocketDetailViewModel.loadDetail(1)
-        lifecycleScope.launch {
+        setPhotoRecyclerView()
+        observerRocket()
+        viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                rocketDetailViewModel.rocketData.collect { rocket ->
-                    Log.d(TAG, "reload list result is: $rocket")
+                viewModel.rocketData.collect { data ->
+                    Log.d(TAG, "onViewCreated: new data: $data")
                 }
             }
         }
     }
 
+    private fun setPhotoRecyclerView() {
+        val photosAdapter = RocketPhotosAdapter()
+        binding.rocketPhotosRecyclerView.apply {
+            adapter = photosAdapter
+        }
+    }
+
+    private fun loadRocket() {
+        val defaultValue = -1
+        val rocketId = arguments?.getInt(ROCKET_ID_KEY) ?: defaultValue
+        if (rocketId == defaultValue) {
+            return
+        }
+        viewModel.loadDetail(rocketId)
+    }
+
+    private fun observerRocket() {
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.rocketData.collect { rocket ->
+                    val title = rocket?.name ?: getString(R.string.loading)
+                    setActionBarTitle(title)
+                }
+            }
+        }
+    }
+
+    private fun setActionBarTitle(newTitle: String) {
+        setActionBar {
+            title = newTitle
+        }
+    }
+
+
     companion object {
         private const val TAG = "RocketDetailFragment"
+
+        private const val ROCKET_ID_KEY = "RocketIdKey"
+
+        fun createArguments(rocketId: Int): Bundle {
+            val bundle = Bundle()
+            bundle.apply {
+                putInt(ROCKET_ID_KEY, rocketId)
+            }
+            return bundle
+        }
+
     }
 
 }

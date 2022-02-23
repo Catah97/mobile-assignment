@@ -10,10 +10,7 @@ import com.example.rocketapp.rocket.repository.model.Rocket
 import com.example.rocketapp.tools.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,15 +19,19 @@ class RocketDetailViewModel @Inject constructor(
     private val spaceXRocketRepository: SpaceXRocketRepository
 ) : BaseViewModel() {
 
-    private val _rocketData = MutableStateFlow<Rocket?>(null)
-    val rocketData: StateFlow<Rocket?> = _rocketData
+    val rocketData by lazy {
+        spaceXRocketRepository.getRocketData()
+            .mapNotNull { result ->
+                val rockets = result?.getOrNull()
+                rockets?.firstOrNull { it.id == rocketId }
+            }
+            .stateIn(viewModelScope, SharingStarted.Lazily, null)
+    }
+
+    private var rocketId: Int? = null
 
     fun loadDetail(rocketId: Int) {
-        viewModelScope.launch {
-            Log.d(TAG, "loadDetail: rocketId: $rocketId")
-            val rocket = spaceXRocketRepository.getRocketById(rocketId)
-            _rocketData.value = rocket
-        }
+        this.rocketId = rocketId
     }
 
     companion object {

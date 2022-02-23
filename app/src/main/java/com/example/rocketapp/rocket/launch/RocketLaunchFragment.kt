@@ -12,9 +12,9 @@ import com.example.rocketapp.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RocketLaunchFragment: BaseFragment<FragmentRocketLaunchBinding>() {
-
-    private val rocketLaunchViewModel: RocketLaunchViewModel by viewModels()
+class RocketLaunchFragment: BaseFragment<
+        FragmentRocketLaunchBinding,
+        RocketLaunchViewModel>(RocketLaunchViewModel::class) {
 
     override val bindingInflater = { layoutInflater: LayoutInflater, parent: ViewGroup? ->
         FragmentRocketLaunchBinding.inflate(layoutInflater, parent, false)
