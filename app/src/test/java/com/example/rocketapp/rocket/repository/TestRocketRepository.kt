@@ -1,13 +1,10 @@
 package com.example.rocketapp.rocket.repository
 
 import com.example.rocketapp.rocket.repository.model.Rocket
-import com.example.rocketapp.rocket.tools.TestRocketBuilder
-import com.example.rocketapp.tools.Success
-import com.example.rocketapp.tools.date.minusDay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import org.mockito.internal.matchers.Not
-import java.lang.Exception
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
 import java.lang.RuntimeException
 import java.util.*
 
@@ -73,22 +70,18 @@ fun createRocketRepository(): SpaceXRocketTestRepository {
 }
 
 private fun createRocket1(): Rocket {
-    return TestRocketBuilder()
-        .setId(1)
-        .setName("Rocket Number one")
-        .setFirthFlight(
-            Date()
-        )
-        .build()
+    return mock {
+        on { id } doReturn 1
+        on { name } doReturn "Rocket Number one"
+        on { firstFlight } doReturn Date()
+    }
 }
 
 private fun createRocket2(): Rocket {
-    return TestRocketBuilder()
-        .setId(2)
-        .setName("Rocket number two")
-        .setDescription("Some really really really awesome rocket")
-        .setFirthFlight(
-            Date(0)
-        )
-        .build()
+    return mock {
+        on { id } doReturn 2
+        on { name } doReturn "Rocket number two"
+        on { description } doReturn "Some really really really awesome rocket"
+        on { firstFlight } doReturn Date(0)
+    }
 }

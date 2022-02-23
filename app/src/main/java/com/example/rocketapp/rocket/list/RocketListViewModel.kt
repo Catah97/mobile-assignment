@@ -23,7 +23,6 @@ class RocketListViewModel @Inject constructor(
 
     fun loadRockets() {
         viewModelScope.launch {
-            Log.d(TAG, "loadRockets request for $spaceXRocketRepository")
             val result = spaceXRocketRepository.loadRocketData()
             val rockets = result.getOrNull() ?: emptyList()
             val rocketItems = rockets.map {

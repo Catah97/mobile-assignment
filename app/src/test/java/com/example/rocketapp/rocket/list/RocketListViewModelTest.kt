@@ -1,16 +1,30 @@
 package com.example.rocketapp.rocket.list
 
 import com.example.rocketapp.rocket.list.adapter.RocketItem
-import com.example.rocketapp.rocket.repository.SpaceXRocketTestRepository
-import com.example.rocketapp.rocket.repository.TestRocketRepository
 import com.example.rocketapp.rocket.repository.createRocketRepository
 import com.example.rocketapp.rocket.repository.model.Rocket
-import com.example.rocketapp.rocket.repository.model.info.RocketHeight
-import com.example.rocketapp.rocket.tools.TestRocketBuilder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
-import java.util.*
 
 class RocketListViewModelTest {
+
+    private val mainThreadSurrogate = newSingleThreadContext("UI thread")
+
+    @Before
+    fun setUp() {
+        Dispatchers.setMain(mainThreadSurrogate)
+    }
+
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain() // reset the main dispatcher to the original Main dispatcher
+        mainThreadSurrogate.close()
+    }
 
     @Test
     fun testRocketListLoad() {
@@ -21,7 +35,7 @@ class RocketListViewModelTest {
         Thread.sleep(500)
         val repositoryList = repository.getRocketList()
         val viewModelList = viewModel.rocketItemsData.value
-        assert(viewModelList.size == repositoryList.size)
+        assert(viewModelList.size == repositoryList.size) { "Diff item size: ${viewModelList.size} repository size: ${repositoryList.size}" }
         viewModelList.forEachIndexed { index, rocketItem ->
             val repositoryItem = repositoryList[index]
             rocketItem.assert(repositoryItem)
