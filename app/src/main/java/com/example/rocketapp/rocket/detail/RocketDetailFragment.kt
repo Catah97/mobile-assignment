@@ -31,11 +31,22 @@ class RocketDetailFragment: BaseFragment<
         FragmentRocketDetailBinding.inflate(layoutInflater, parent, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        loadRocket()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setPhotoRecyclerView()
-        loadRocket()
         observerRocket()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.rocketData.collect { data ->
+                    Log.d(TAG, "onViewCreated: new data: $data")
+                }
+            }
+        }
     }
 
     private fun setPhotoRecyclerView() {
