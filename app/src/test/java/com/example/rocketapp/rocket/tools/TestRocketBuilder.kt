@@ -1,8 +1,5 @@
 package com.example.rocketapp.rocket.tools
 
-import android.content.Context
-import android.provider.Settings.Global.getString
-import com.example.rocketapp.R
 import com.example.rocketapp.rocket.repository.model.Rocket
 import org.mockito.Mock
 import org.mockito.Mockito.`when` as on
