@@ -12,8 +12,8 @@
     <string name="first_stage">First Stage</string>
     <string name="reusable">reusable</string>
     <string name="not_reusable">not reusable</string>
-    <string name="engines">engines</string>
-    <string name="tons_of_fuel">tons of fuel</string>
-    <string name="seconds_burn_time">second burn time</string>
+    <string name="engines">%1$d engines</string>
+    <string name="tons_of_fuel">%1$d tons of fuel</string>
+    <string name="seconds_burn_time">%1$d second burn time</string>
     <string name="photos">Photos</string>
 </resources>

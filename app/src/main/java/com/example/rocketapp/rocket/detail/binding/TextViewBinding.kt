@@ -34,21 +34,19 @@ fun TextView.setTonsText(reusable: Boolean) {
 
 @BindingAdapter("setEnginesText")
 fun TextView.setEnginesText(enginesCount: Int) {
-    val engines = context.getString(R.string.engines)
-    val textValue = "$enginesCount $engines"
+    val textValue = context.getString(R.string.engines, enginesCount)
     text = textValue
 }
 
 @BindingAdapter("setTonsOfFuelText")
 fun TextView.setTonsOfFuelText(tonsOfFuel: Double) {
-    val describe = context.getString(R.string.tons_of_fuel)
-    val textValue = "${tonsOfFuel.roundToInt()} $describe"
+    val tonsOfFuelValue = tonsOfFuel.roundToInt()
+    val textValue = context.getString(R.string.tons_of_fuel, tonsOfFuelValue)
     text = textValue
 }
 
 @BindingAdapter("setSecondBurnTimeText")
 fun TextView.setSecondBurnTimeText(secondBurnTimeText: Int) {
-    val describe = context.getString(R.string.seconds_burn_time)
-    val textValue = "$secondBurnTimeText $describe"
+    val textValue = context.getString(R.string.seconds_burn_time, secondBurnTimeText)
     text = textValue
 }
