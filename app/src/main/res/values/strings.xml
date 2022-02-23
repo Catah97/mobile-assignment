@@ -6,8 +6,8 @@
     <string name="overview">Overview</string>
     <string name="parameters">Parameters</string>
     <string name="height">Height</string>
-    <string name="m">m</string>
-    <string name="t">t</string>
+    <string name="m">%1$d m</string>
+    <string name="t">%1$d t</string>
     <string name="loading">Loading</string>
     <string name="first_stage">First Stage</string>
     <string name="reusable">reusable</string>

@@ -10,16 +10,15 @@ import kotlin.math.roundToInt
 
 @BindingAdapter("setMetersText")
 fun TextView.setMetersText(value: Double) {
-    val meters = context.getString(R.string.m)
-    val textValue = "${value.roundToInt()}$meters"
+    val mates = value.roundToInt()
+    val textValue = context.getString(R.string.m, mates)
     text = textValue
 }
 
 @BindingAdapter("setTonsText")
 fun TextView.setTonsText(value: Double) {
-    val tons = context.getString(R.string.t)
     val tonsValue = value.roundToInt() / 1000
-    val textValue = "$tonsValue$tons"
+    val textValue = context.getString(R.string.t, tonsValue)
     text = textValue
 }
 
