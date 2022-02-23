@@ -16,7 +16,7 @@ import org.junit.Test
 @OptIn(ExperimentalCoroutinesApi::class)
 class RocketListViewModelTest {
 
-    private val mainThreadSurrogate = Dispatchers.Main
+    private val mainThreadSurrogate = newSingleThreadContext("UI thread")
 
     @Before
     fun setUp() {
@@ -26,6 +26,7 @@ class RocketListViewModelTest {
     @After
     fun tearDown() {
         Dispatchers.resetMain() // reset the main dispatcher to the original Main dispatcher
+        mainThreadSurrogate.close()
     }
 
     @Test
