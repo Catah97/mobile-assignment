@@ -60,7 +60,6 @@ class RocketListViewModelTest {
         assert(id == rocket.id) { "Diff item id: $id rocket id: ${rocket.id}" }
         assert(name == rocket.name) { "Diff item name: $name rocket name: ${rocket.name}" }
         assert(firstFlight == rocket.firstFlight) { "Diff item firstFlight: $firstFlight rocket firstFlight: ${rocket.firstFlight}" }
-
     }
 
 }
