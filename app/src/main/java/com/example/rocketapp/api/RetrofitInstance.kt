@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-
 class DateAdapter {
 
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -24,7 +23,6 @@ class DateAdapter {
     fun dateToJson(s: String): Date {
         return dateFormat.parse(s) ?: throw IllegalArgumentException("Could not parse date $s")
     }
-
 }
 
 fun getRetrofit(): Retrofit {

@@ -1,23 +1,20 @@
 package com.example.rocketapp.rocket.list.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rocketapp.databinding.RowRocketItemBinding
-import com.example.rocketapp.rocket.repository.model.Rocket
 import com.example.rocketapp.tools.date.toUiDate
 
 class RocketListAdapter(
     diffCallback: DiffUtil.ItemCallback<RocketItem> = RocketItemDiffCallback()
-): ListAdapter<RocketItem, RocketListViewHolder>(diffCallback) {
+) : ListAdapter<RocketItem, RocketListViewHolder>(diffCallback) {
 
     private var itemClickListener: ((Int, RocketItem) -> Unit)? = null
 
-    fun setOnItemClickListener(f : (Int, RocketItem) -> Unit) {
+    fun setOnItemClickListener(f: (Int, RocketItem) -> Unit) {
         itemClickListener = f
     }
 

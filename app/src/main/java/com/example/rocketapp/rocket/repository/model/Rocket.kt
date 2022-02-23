@@ -19,4 +19,3 @@ data class Rocket(
     val secondStage: RocketSecondStage,
     val image: List<String>
 )
-

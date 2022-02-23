@@ -58,7 +58,6 @@ sealed class Try<out T> {
     }
 
     abstract fun get(): T
-
 }
 
 data class Success<out T>(val value: T) : Try<T>() {

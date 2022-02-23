@@ -5,27 +5,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.rocketapp.R
 import com.example.rocketapp.databinding.FragmentRocketDetailBinding
-import com.example.rocketapp.databinding.FragmentRocketListBinding
 import com.example.rocketapp.rocket.detail.adapter.RocketPhotosAdapter
-import com.example.rocketapp.rocket.launch.RocketLaunchViewModel
-import com.example.rocketapp.rocket.list.RocketListFragment
-import com.example.rocketapp.rocket.list.RocketListViewModel
 import com.example.rocketapp.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class RocketDetailFragment: BaseFragment<
-        FragmentRocketDetailBinding,
-        RocketDetailViewModel>(RocketDetailViewModel::class) {
+class RocketDetailFragment : BaseFragment<
+    FragmentRocketDetailBinding,
+    RocketDetailViewModel>(RocketDetailViewModel::class) {
 
     override val bindingInflater = { layoutInflater: LayoutInflater, parent: ViewGroup? ->
         FragmentRocketDetailBinding.inflate(layoutInflater, parent, false)
@@ -82,7 +76,6 @@ class RocketDetailFragment: BaseFragment<
         }
     }
 
-
     companion object {
         private const val TAG = "RocketDetailFragment"
 
@@ -95,7 +88,5 @@ class RocketDetailFragment: BaseFragment<
             }
             return bundle
         }
-
     }
-
 }

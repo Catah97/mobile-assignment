@@ -1,8 +1,5 @@
 package com.example.rocketapp.tools.binding
 
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.rocketapp.R

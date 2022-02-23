@@ -1,9 +1,9 @@
 package com.example.rocketapp.di
 
-import com.example.rocketapp.api.getRetrofit
 import com.example.rocketapp.api.SpaceXRocketApi
-import com.example.rocketapp.rocket.repository.SpaceXRocketRepository
+import com.example.rocketapp.api.getRetrofit
 import com.example.rocketapp.rocket.repository.ProdSpaceXRocketRepository
+import com.example.rocketapp.rocket.repository.SpaceXRocketRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,5 +25,4 @@ object AppModule {
         val retrofit = getRetrofit()
         return retrofit.create(SpaceXRocketApi::class.java)
     }
-
 }

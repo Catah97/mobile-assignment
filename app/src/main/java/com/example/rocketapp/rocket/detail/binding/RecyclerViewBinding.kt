@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rocketapp.rocket.detail.adapter.RocketPhotosAdapter
 import com.example.rocketapp.rocket.repository.model.Rocket
 
-
 @BindingAdapter("bindRocketPhotos")
 fun RecyclerView.bindRocketPhotos(rocket: Rocket?) {
     val photosUrl = rocket?.image ?: emptyList()
