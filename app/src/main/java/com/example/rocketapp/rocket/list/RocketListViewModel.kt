@@ -15,7 +15,12 @@ class RocketListViewModel @Inject constructor(
     private val spaceXRocketRepository: SpaceXRocketRepository
 ) : BaseViewModel() {
 
-    val rocketItemsData = MutableStateFlow<List<RocketItem>>(emptyList())
+    val rocketItemsData = spaceXRocketRepository.getRocketData().map { result ->
+        val rockets = result?.getOrNull() ?: emptyList()
+        rockets.map {
+            RocketItem(it.id, it.name, it.firstFlight)
+        }
+    }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
     init {
         loadRockets()
@@ -23,12 +28,7 @@ class RocketListViewModel @Inject constructor(
 
     fun loadRockets() {
         viewModelScope.launch {
-            val result = spaceXRocketRepository.loadRocketData()
-            val rockets = result.getOrNull() ?: emptyList()
-            val rocketItems = rockets.map {
-                RocketItem(it.id, it.name, it.firstFlight)
-            }
-            rocketItemsData.value = rocketItems
+            spaceXRocketRepository.loadRocketData()
         }
     }
 
