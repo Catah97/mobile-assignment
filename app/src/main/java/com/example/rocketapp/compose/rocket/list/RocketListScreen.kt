@@ -3,6 +3,7 @@ package com.example.rocketapp.compose.rocket.list
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -23,25 +24,32 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.ui.NavigationUiSaveStateControl
 import com.example.rocketapp.R
+import com.example.rocketapp.rocket.detail.RocketDetailFragment
 import com.example.rocketapp.rocket.list.RocketListViewModel
 import com.example.rocketapp.rocket.list.adapter.RocketItem
+import com.example.rocketapp.rocket.repository.model.Rocket
 import com.example.rocketapp.tools.date.toUiDate
 import java.util.*
 
 @Composable
-fun RocketListScreen(viewModel: RocketListViewModel) {
-    val rocketList = viewModel.rocketItemsData.collectAsState().value
+fun RocketListScreen(rockets: List<RocketItem>, rowClick: (RocketItem) -> Unit) {
     LazyColumn {
-        items(rocketList) {
-            RocketListRow(it)
+        items(rockets) {
+            RocketListRow(it, rowClick)
         }
     }
 }
 
 @Composable
-fun RocketListRow(rocketItem: RocketItem) {
-    Column {
+fun RocketListRow(rocketItem: RocketItem, rowClick: (RocketItem) -> Unit) {
+    Column(
+        modifier = Modifier.clickable {
+            rowClick(rocketItem)
+        }
+    ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -85,8 +93,14 @@ fun RocketInfo(rocketItem: RocketItem) {
     }
 }
 
-//@Preview
-//@Composable
-//fun ComposablePreview() {
-//    RocketListScreen()
-//}
+@Preview
+@Composable
+fun ComposablePreview() {
+    val list = listOf(
+        RocketItem(0, "Rocket1", Date()),
+        RocketItem(1, "Rocket2", Date())
+    )
+    RocketListScreen(list) {
+
+    }
+}

@@ -4,20 +4,36 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import com.example.rocketapp.compose.rocket.list.RocketListScreen
-import com.example.rocketapp.rocket.list.RocketListViewModel
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.rocketapp.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ComposeMainActivity: ComponentActivity() {
+class ComposeMainActivity: AppCompatActivity() {
 
-    val rocketListViewModel: RocketListViewModel by viewModels()
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = getNavController()
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            RocketListScreen(rocketListViewModel)
-        }
+        setContentView(R.layout.activity_compose_main)
+
+        val navController = getNavController()
+        val mainFragmentIds = setOf(
+            R.id.rocket_list
+        )
+        val appBarConfiguration = AppBarConfiguration(mainFragmentIds)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+    }
+
+    private fun getNavController(): NavController {
+        return findNavController(R.id.nav_host_fragment_activity)
     }
 }
 
