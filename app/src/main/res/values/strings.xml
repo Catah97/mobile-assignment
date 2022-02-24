@@ -15,7 +15,7 @@
     <string name="not_reusable">not reusable</string>
     <string name="engines">%1$d engines</string>
     <string name="tons_of_fuel">%1$d tons of fuel</string>
-    <string name="seconds_burn_time">%1$d second burn time</string>
+    <string name="seconds_burn_time">%1$s second burn time</string>
     <string name="photos">Photos</string>
     <string name="launch_rocket_info">Move your phone up to launch the rocket</string>
     <string name="launch_successful">Launch successful</string>

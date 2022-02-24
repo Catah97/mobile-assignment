@@ -7,20 +7,30 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions
 import com.example.rocketapp.R
 import com.example.rocketapp.compose.rocket.list.RocketListScreen
 import com.example.rocketapp.rocket.detail.RocketDetailViewModel
@@ -31,6 +41,7 @@ import com.example.rocketapp.rocket.repository.model.info.RocketHeight
 import com.example.rocketapp.rocket.repository.model.info.RocketMass
 import com.example.rocketapp.rocket.repository.model.stages.RocketFirstStage
 import com.example.rocketapp.rocket.repository.model.stages.RocketSecondStage
+import com.skydoves.landscapist.glide.GlideImage
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -42,7 +53,7 @@ fun RocketDetailScreen(rocket: Rocket?) {
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier
-                .scrollable(scrollState, Orientation.Vertical)
+                .verticalScroll(scrollState)
                 .fillMaxSize()
                 .padding(8.dp)
         ) {
@@ -59,6 +70,10 @@ fun RocketDetailScreen(rocket: Rocket?) {
             }
             FirstRocketStage(rocket.firstStage)
             SecondRocketStage(rocket.secondStage)
+            if (rocket.image.isNotEmpty()) {
+                SectionTitle(R.string.photos)
+                RocketImages(rocket.image)
+            }
         }
     }
 }
@@ -99,10 +114,12 @@ fun RocketInfo(value: String, title: String) {
             .padding(8.dp)
     ) {
         Text(value,
+            color = Color.White,
             fontSize = 16.sp,
-            maxLines = 1
+            maxLines = 1,
         )
         Text(title,
+            color = Color.White,
             fontSize = 12.sp,
             maxLines = 1
         )
@@ -112,47 +129,69 @@ fun RocketInfo(value: String, title: String) {
 @Composable
 fun FirstRocketStage(rocketFirstStage: RocketFirstStage) {
     Column(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = RocketStageModifier()
     ) {
         SectionTitle(R.string.first_stage)
-        val reusable = if (rocketFirstStage.reusable) {
-            stringResource(R.string.reusable)
-        } else {
-            stringResource(R.string.not_reusable)
-        }
-        val engines = stringResource(
-            R.string.engines,
-            rocketFirstStage.engines
+        RocketStageContent(
+            rocketFirstStage.reusable,
+            rocketFirstStage.engines,
+            rocketFirstStage.fuelAmountTons,
+            rocketFirstStage.burnTimeSec
         )
-        val tonsOfFuel = stringResource(
-            R.string.tons_of_fuel,
-            rocketFirstStage.fuelAmountTons.roundToInt()
-        )
-        val burnTime = if (rocketFirstStage.burnTimeSec == null) {
-            "-"
-        } else {
-            stringResource(R.string.seconds_burn_time)
-        }
-        StageIcon(R.drawable.ic_reusable, reusable)
-        StageIcon(R.drawable.ic_engine, engines)
-        StageIcon(R.drawable.ic_fuel, tonsOfFuel)
-        StageIcon(R.drawable.ic_burn, burnTime)
     }
 }
 
 @Composable
 fun SecondRocketStage(rocketSecondStage: RocketSecondStage) {
     Column(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = RocketStageModifier()
     ) {
         SectionTitle(R.string.second_stage)
+        RocketStageContent(
+            rocketSecondStage.reusable,
+            rocketSecondStage.engines,
+            rocketSecondStage.fuelAmountTons,
+            rocketSecondStage.burnTimeSec
+        )
     }
+}
+
+@Composable
+fun RocketStageContent(
+    reusable: Boolean,
+    engines: Int,
+    fuelAmountTons: Double,
+    burnTimeSec: Int?
+) {
+    val reusableText = if (reusable) {
+        stringResource(R.string.reusable)
+    } else {
+        stringResource(R.string.not_reusable)
+    }
+    val enginesText = stringResource(
+        R.string.engines,
+        engines
+    )
+    val tonsOfFuelText = stringResource(
+        R.string.tons_of_fuel,
+        fuelAmountTons.roundToInt()
+    )
+    val burnTime = burnTimeSec?.toString() ?: "-"
+    val burnTimeText = stringResource(R.string.seconds_burn_time, burnTime)
+    StageIcon(R.drawable.ic_reusable, reusableText)
+    StageIcon(R.drawable.ic_engine, enginesText)
+    StageIcon(R.drawable.ic_fuel, tonsOfFuelText)
+    StageIcon(R.drawable.ic_burn, burnTimeText)
 }
 
 @Composable
 fun StageIcon(@DrawableRes painId: Int, text: String) {
     val icon = painterResource(id = painId)
-    Row {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
         Image(painter = icon, contentDescription = text)
         Text(text = text)
     }
@@ -164,7 +203,26 @@ fun RocketStageModifier() = Modifier
         colorResource(R.color.stage_background_color),
         RoundedCornerShape(10.dp)
     )
+    .fillMaxWidth()
     .padding(8.dp)
+
+@Composable
+fun RocketImages(list: List<String>) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        list.forEach { photoUrl ->
+            GlideImage(
+                imageModel = photoUrl,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.clip(
+                    RoundedCornerShape(10.dp
+                    )
+                )
+            )
+        }
+    }
+}
 
 @Preview
 @Composable
@@ -183,7 +241,9 @@ fun ComposablePreview() {
         RocketSecondStage(
             false, 3, 50.0, 5
         ),
-        emptyList()
+        listOf(
+            "https://www.zoochleby.cz/uploads/images/6131/large/003372-6131.jpg"
+        )
     )
     RocketDetailScreen(rocket = rocket)
 }
