@@ -10,6 +10,7 @@
     <string name="t">%1$d t</string>
     <string name="loading">Loading</string>
     <string name="first_stage">First Stage</string>
+    <string name="second_stage">Second Stage</string>
     <string name="reusable">reusable</string>
     <string name="not_reusable">not reusable</string>
     <string name="engines">%1$d engines</string>
@@ -18,5 +19,7 @@
     <string name="photos">Photos</string>
     <string name="launch_rocket_info">Move your phone up to launch the rocket</string>
     <string name="launch_successful">Launch successful</string>
+    <string name="mass">Mass</string>
+    <string name="diameter">Diameter</string>
 
 </resources>
