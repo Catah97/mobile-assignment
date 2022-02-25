@@ -39,10 +39,14 @@ class RocketDetailFragment: ComposeBaseFragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.launch) {
-            //launchRocket()
+            launchRocket()
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun launchRocket() {
+        navController.navigate(R.id.action_rocket_detail_to_rocket_launch)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
