@@ -5,24 +5,19 @@ import android.view.*
 import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.platform.ComposeView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.rocketapp.R
 import com.example.rocketapp.compose.rocket.base.ComposeBaseFragment
-import com.example.rocketapp.rocket.detail.RocketDetailFragment
 import com.example.rocketapp.rocket.detail.RocketDetailViewModel
-import com.example.rocketapp.rocket.list.RocketListViewModel
-import com.example.rocketapp.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class RocketDetailFragment: ComposeBaseFragment() {
+class RocketDetailFragment : ComposeBaseFragment() {
 
     val viewModel: RocketDetailViewModel by viewModels()
 

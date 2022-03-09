@@ -1,8 +1,6 @@
 package com.example.rocketapp.compose.rocket.list
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,27 +8,16 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.modifier.modifierLocalProvider
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.ui.NavigationUiSaveStateControl
 import com.example.rocketapp.R
-import com.example.rocketapp.rocket.detail.RocketDetailFragment
-import com.example.rocketapp.rocket.list.RocketListViewModel
 import com.example.rocketapp.rocket.list.adapter.RocketItem
-import com.example.rocketapp.rocket.repository.model.Rocket
 import com.example.rocketapp.tools.date.toUiDate
 import java.util.*
 
@@ -101,6 +88,5 @@ fun ComposablePreview() {
         RocketItem(1, "Rocket2", Date())
     )
     RocketListScreen(list) {
-
     }
 }

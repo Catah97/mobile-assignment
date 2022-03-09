@@ -8,8 +8,6 @@ import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 class RocketDetailFragmentTest {
 
@@ -37,12 +35,12 @@ class RocketDetailFragmentTest {
             viewModel.rocketData
                 .take(2)
                 .collectIndexed { index, value ->
-                if (index == 0) {
-                    assert(value == null)
-                } else if (index == 1) {
-                    assert(detailItem == value)
+                    if (index == 0) {
+                        assert(value == null)
+                    } else if (index == 1) {
+                        assert(detailItem == value)
+                    }
                 }
-            }
         }
     }
 }

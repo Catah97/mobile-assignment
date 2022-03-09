@@ -8,13 +8,12 @@ import org.mockito.kotlin.mock
 import java.lang.RuntimeException
 import java.util.*
 
-class TestRocketRepository: SpaceXRocketTestRepository {
+class TestRocketRepository : SpaceXRocketTestRepository {
 
     private var exception: Throwable? = null
     private val rocketList = mutableListOf<Rocket>()
 
     private val rocketsData = MutableStateFlow<Result<List<Rocket>>?>(null)
-
 
     override fun getRocketData(): StateFlow<Result<List<Rocket>>?> {
         return rocketsData
@@ -50,7 +49,7 @@ class TestRocketRepository: SpaceXRocketTestRepository {
     }
 }
 
-class RocketLoadingFail(): RuntimeException()
+class RocketLoadingFail() : RuntimeException()
 
 fun createErrorRocketRepository(): SpaceXRocketTestRepository {
     return TestRocketRepository()

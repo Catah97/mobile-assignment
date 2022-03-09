@@ -1,6 +1,7 @@
 package com.example.rocketapp.tools.date
 
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 fun Date.beforeOrEqual(date: Date): Boolean {
     return this == date || this.before(date)

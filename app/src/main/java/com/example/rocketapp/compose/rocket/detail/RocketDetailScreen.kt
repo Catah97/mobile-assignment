@@ -4,11 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -18,23 +14,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions
 import com.example.rocketapp.R
-import com.example.rocketapp.compose.rocket.list.RocketListScreen
-import com.example.rocketapp.rocket.detail.RocketDetailViewModel
-import com.example.rocketapp.rocket.list.adapter.RocketItem
 import com.example.rocketapp.rocket.repository.model.Rocket
 import com.example.rocketapp.rocket.repository.model.info.RocketDiameter
 import com.example.rocketapp.rocket.repository.model.info.RocketHeight
@@ -44,7 +32,6 @@ import com.example.rocketapp.rocket.repository.model.stages.RocketSecondStage
 import com.skydoves.landscapist.glide.GlideImage
 import java.util.*
 import kotlin.math.roundToInt
-
 
 @Composable
 fun RocketDetailScreen(rocket: Rocket?) {
@@ -93,7 +80,8 @@ fun SectionText(text: String) {
 fun RocketInfo(
     value: Double,
     @StringRes valueUnitId: Int,
-    @StringRes titleId: Int) {
+    @StringRes titleId: Int
+) {
     val mates = value.roundToInt()
     val textValue = stringResource(valueUnitId, mates)
     val title = stringResource(titleId)
@@ -113,12 +101,14 @@ fun RocketInfo(value: String, title: String) {
             .background(color, RoundedCornerShape(10.dp))
             .padding(8.dp)
     ) {
-        Text(value,
+        Text(
+            value,
             color = Color.White,
             fontSize = 16.sp,
             maxLines = 1,
         )
-        Text(title,
+        Text(
+            title,
             color = Color.White,
             fontSize = 12.sp,
             maxLines = 1
@@ -216,7 +206,8 @@ fun RocketImages(list: List<String>) {
                 imageModel = photoUrl,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.clip(
-                    RoundedCornerShape(10.dp
+                    RoundedCornerShape(
+                        10.dp
                     )
                 )
             )
@@ -234,9 +225,9 @@ fun ComposablePreview() {
         "Descripti alsdjkaskd ajka jksdhas dhasd aas dd ajsdj asdjlasd jklaon",
         RocketHeight(10.0, 11.0),
         RocketMass(11050.0, 11.0),
-        RocketDiameter(11.0,12.0),
+        RocketDiameter(11.0, 12.0),
         RocketFirstStage(
-            true,2,10.0, null
+            true, 2, 10.0, null
         ),
         RocketSecondStage(
             false, 3, 50.0, 5

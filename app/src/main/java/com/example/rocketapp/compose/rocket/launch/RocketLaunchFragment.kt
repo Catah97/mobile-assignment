@@ -5,26 +5,15 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.activity.viewModels
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.platform.ComposeView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.rocketapp.compose.rocket.base.ComposeBaseFragment
-import com.example.rocketapp.rocket.detail.RocketDetailViewModel
-import com.example.rocketapp.rocket.launch.RocketLaunchFragment
-import com.example.rocketapp.rocket.list.RocketListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RocketLaunchFragment: ComposeBaseFragment(), SensorEventListener {
+class RocketLaunchFragment : ComposeBaseFragment(), SensorEventListener {
 
     val viewModel: RocketLaunchViewModel by viewModels()
 

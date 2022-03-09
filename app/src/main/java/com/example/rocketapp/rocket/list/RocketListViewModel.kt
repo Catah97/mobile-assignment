@@ -1,6 +1,5 @@
 package com.example.rocketapp.rocket.list
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.rocketapp.rocket.list.adapter.RocketItem
 import com.example.rocketapp.rocket.repository.SpaceXRocketRepository

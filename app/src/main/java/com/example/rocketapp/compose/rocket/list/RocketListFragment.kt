@@ -10,7 +10,7 @@ import com.example.rocketapp.rocket.list.RocketListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RocketListFragment: ComposeBaseFragment() {
+class RocketListFragment : ComposeBaseFragment() {
 
     val rocketListViewModel: RocketListViewModel by viewModels()
 
@@ -22,5 +22,4 @@ class RocketListFragment: ComposeBaseFragment() {
             navController.navigate(R.id.action_rocket_list_to_rocket_detail, arguments)
         }
     }
-
 }

@@ -11,7 +11,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
-abstract class ComposeBaseFragment: Fragment() {
+abstract class ComposeBaseFragment : Fragment() {
 
     @Composable
     abstract fun FragmentContent()
@@ -38,5 +38,4 @@ abstract class ComposeBaseFragment: Fragment() {
         val actionBar = activity.supportActionBar
         actionBar?.block()
     }
-
 }

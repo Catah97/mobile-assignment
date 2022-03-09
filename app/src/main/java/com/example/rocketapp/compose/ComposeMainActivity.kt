@@ -1,9 +1,6 @@
 package com.example.rocketapp.compose
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -13,7 +10,7 @@ import com.example.rocketapp.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ComposeMainActivity: AppCompatActivity() {
+class ComposeMainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = getNavController()
@@ -36,4 +33,3 @@ class ComposeMainActivity: AppCompatActivity() {
         return findNavController(R.id.nav_host_fragment_activity)
     }
 }
-
