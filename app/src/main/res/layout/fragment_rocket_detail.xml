@@ -95,7 +95,7 @@
                     style="@style/Theme.RocketApp.Parameters_Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/height" />
+                    android:text="@string/diameter" />
 
             </LinearLayout>
 
@@ -118,7 +118,7 @@
                     style="@style/Theme.RocketApp.Parameters_Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/height" />
+                    android:text="@string/mass" />
 
             </LinearLayout>
 

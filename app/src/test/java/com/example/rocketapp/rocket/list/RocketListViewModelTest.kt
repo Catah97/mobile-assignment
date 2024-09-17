@@ -34,7 +34,7 @@ class RocketListViewModelTest {
         val repository = createRocketRepository()
         val viewModel = RocketListViewModel(repository)
         viewModel.loadRockets()
-        //Waiting for coroutine to load data
+        // Waiting for coroutine to load data
         Thread.sleep(500)
         val repositoryList = repository.getRocketList()
         val viewModelList = viewModel.rocketItemsData.value
@@ -50,7 +50,7 @@ class RocketListViewModelTest {
         val repository = createErrorRocketRepository()
         val viewModel = RocketListViewModel(repository)
         viewModel.loadRockets()
-        //Waiting for coroutine to load data
+        // Waiting for coroutine to load data
         Thread.sleep(500)
         val viewModelList = viewModel.rocketItemsData.value
         assert(viewModelList.isEmpty()) { "ViewModelList is not empty" }
@@ -61,5 +61,4 @@ class RocketListViewModelTest {
         assert(name == rocket.name) { "Diff item name: $name rocket name: ${rocket.name}" }
         assert(firstFlight == rocket.firstFlight) { "Diff item firstFlight: $firstFlight rocket firstFlight: ${rocket.firstFlight}" }
     }
-
 }
